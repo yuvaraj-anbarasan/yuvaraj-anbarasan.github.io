@@ -1,0 +1,58 @@
+body{
+    margin: auto;
+}
+/************************* Navigation bar ***********************/
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding:0;
+    padding-right: 10%;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: right;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 20px 16px;
+    text-decoration: none;
+}
+  
+li a:hover {
+    background-color: #111;
+}
+
+/************************* Profile pic *************************/
+.profile{
+    
+    text-align: center;
+}
+
+#profile-img img{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    display: block;
+    width: 200px;
+    border-radius: 100px;
+}
+
+#name h2{
+    margin: auto;
+    padding: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #6E6D6D;
+    font-size: 40px;
+}
+
+#profile-details h3{
+    margin: auto;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #959191;
+    font-size: 30px;
+}
