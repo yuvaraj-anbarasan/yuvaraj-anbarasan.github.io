@@ -1,0 +1,91 @@
+body{
+    margin: auto;
+}
+/************************* Navigation bar ***********************/
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding:0;
+    padding-right: 10%;
+    overflow: hidden;
+}
+
+nav li {
+    float: right;
+}
+
+nav li a {
+    display: block;
+    text-align: center;
+    padding: 20px 16px;
+    padding-bottom: 10px;
+    text-decoration: none;
+}
+  
+nav li a:hover {
+    border-bottom: 5px solid #E9E8E8;
+}
+/************************ gsoc logo ******************************/
+#gsoc-logo{
+    text-align: center;
+}
+#gsoc-logo h3{
+    margin: 0;
+    color: #787878;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: sans-serif;
+}
+#gsoc-logo img{
+    margin-left: auto;
+    margin-right: auto;
+    height: 200px;
+    width: 400px;
+    display: block;
+}
+/************************ report body *****************************/
+.report-body{
+    margin-left: 10%;
+    margin-right: 10%;
+    padding: 0;
+    font-family: sans-serif, Verdana, Geneva, Tahoma;
+    color: #6c6a74;
+}
+.report-body h3{
+    color: #474747;
+}
+.report-body h4{
+    font-weight: normal;
+}
+.report-body img{
+    width: 80%;
+}                                                                            
+.report-body p{
+    text-align: justify;
+}
+#patch-module{
+    margin: 10px;
+    padding:10px 15px;
+    background-color: #E9E8E8;
+}
+.my-work{
+    margin-left: 10px;
+    padding: 15px;
+    border-left:5px #474747 solid;
+}
+.my-work p{
+    margin: 0;
+}
+#code-snippet img{
+    height: 60px;
+    width: 600px;
+}
+#summary{
+    background-color: #f0f1f7;
+    padding: 15px 20px;
+}
+/************************** footer ***********************************/
+footer{
+    height: 200px;
+    background-color: #d7d7d7;
+}

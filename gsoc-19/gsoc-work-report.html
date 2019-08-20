@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a>RESUME</a></li>
+                <li><a>PROJECTS</a></li>
+                <li><a>ABOUT</a></li>
+                <li><a>HOME</a></li>
+            </ul>
+        </nav>
+        <div id="gsoc-logo">
+            <img src="./../assets/gsoc/GSoC-logo.png">
+            <h3>2019</h3>
+        </div>
+        <div class="report-body">
+            <h3 id="project-title">Support gradle for JPF and extensions</h3>
+            <div id="about-jpf">
+                <h3>About JPF</h3>
+                <p>JPF is a model checking tool for Java applications. JPF-core is the core structure of
+                    JPF. It is a Virtual Machine (VM) for Java bytecode which executes the system under
+                    test (SUT). While execution semantics of Java bytecodes are clearly defined in Sun's 
+                    Java virtual machine specifications, the semantics are hardwired in JPF - the VM 
+                    instruction set is represented by a set of classes that can be replaced. JPF is a special VM.
+                    JPF itself is written in Java, so it is not as fast as your normal Java. That implies that JPF is VM
+                    which is running on top of another VM.
+                </P>
+                <P>    
+                    As JPF executes the SUT, it checks for certain properties which are given to JPF as input. 
+                    Some of the properties that can be checked by JPF are unhandled exceptions, deadlocks, 
+                    and user-defined assertions which are used to test properties of the code's behavior. 
+                    After the execution of the SUT, JPF gives a detailed report on the properties which hold 
+                    and verification artifacts that have been created by JPF for further analysis (like test cases).                        
+                </p>
+            </div>
+            <div id="overview">
+                <h3>Overview</h3>
+                <p>
+                        My task was to support gradle for JPF, for java version 11 and fix the breaking changes caused by
+                        migrating JPF from java version 8 to 11.                     
+                </p>
+            </div>
+            <div>
+                <div >            
+                    <p class="my-work">
+                         My first task was to fix Travis CI and migrate gradle to version 5.4.
+                    </p>
+                    <p>
+                        The arrival of Java 9 introduced some interesting changes like the module system, handling strings, etc 
+                        to the javac compiler and the Java internals.
+                    </p>
+                    <p class="my-work">There were many module classes which were not compiling which 
+                        led to build failure. This was because, packages with same names existed in different modules. This is because 
+                        split packages are not supported from java version 9. To compile the module classes I used --patch-module in gradle. 
+                    </p>
+                </div>
+                    <div id="patch-module">
+                        --patch-module is used to override classes in a module, augment the contents of module and also an 
+                        option supported by javac to compile code "as if" part of the module.
+                    </div> 
+                <div class="my-work">
+                    <p>
+                        With these changes module classes where compiled successfully and the build was successfully.
+                    <br><br>
+                        The next task was to fix string concatenation. This was a major task as it was the main reason for test fails. For example, concatenating
+                        directory paths, expressions, etc.
+                    </p>
+                </div> 
+                <p>
+                    Java 9 changed the way how strings were handled.
+                    To know more about the changes in handling strings, lets take a simple example of string concatenation.
+                </p>
+                <div id="code-snippet">
+                    <img src="../assets/gsoc/string-concatenation/code.PNG">
+                </div>
+                <div>
+                    <h4>Compiler changes:</h4>
+                    <p>
+                        The change is in the Java bytecode that the javac compiler outputs. In Java version 8 and earlier, the last line of our source code 
+                        snippet above would compile to the following bytecode        
+                    </p>
+                    <div class="code-snippet-output">
+                        <img src="../assets/gsoc/string-concatenation/java_8-output.PNG"> 
+                    </div> 
+                    <p>      
+                        The bytecode that is generated now is much shorter, but also introduces two new elements: 
+                        an invokedynamic instruction and a bootstrap method.
+                    </p>
+                    <div class="code-snippet-output">
+                        <img src="../assets/gsoc/string-concatenation/java_11-output.PNG">
+                    </div>
+                    <p>
+                        As stated in the project description of Java 9, the reason for this change is to enable future optimizations of String concatenation 
+                        without requiring further changes to the bytecode produced by javac.
+                        And dynamic method invocation is the ideal solution for that because it delays the method invocation to the runtime.                        
+                    </p>               
+                </div>
+                <div>
+                    <h4>Dynamic method invocation in java:</h4>
+                    <p>
+                        First, the compiler places the invokedynamic instruction in the method body to indicate the use of a dynamic method there. 
+                        This invokeDynamic instruction refers to a bootstrap method which is a regular Java method stored in a special attribute in the class file.
+                        During runtime, this bootstrap method is called to dynamically create the method which is being invoked and wrap it in a container object
+                        called a CallSite. Finally, the JVM extracts a MethodHandle for the newly generated method from the CallSite and executes the method,
+                        manipulating the stack as if it were a regular method invocation.
+                    </p>
+                    <p>  
+                        The marker character \u0001 indicates whether the method should consume an argument from the stack or load an argument 
+                        from the constants passed to the bootstrap method                   
+                    </p>
+                </div>
+                <div class="my-work">
+                    <p>
+                        Summary of my work in fixing String concatenation,
+                    </p>
+                    <ul>
+                        <li>Fixed setBootstrap method</li>
+                        <li>Fixed setting the reference value for the string objects </li>
+                        <li>Getting the bootstrap method arguments i.e string constants from the bootstrap method</li>
+                        <li>Fixed string concatenation with two strings</li>
+                        <li>Wrote test cases for string concatenation </li>
+                        <li>Fixed string concatenation with any number of strings.</li>
+                        <li>Fixed most of the cases of string concatenation like string + char, string + byte, etc </li>
+                    </ul>
+                    <p>
+                        I have improved the test success rate from 20% to 90%.
+                    </p>
+                </div>
+            </div>
+            
+            <div id="pull-request">
+                <h3>Pull request</h3>
+            </div>
+            <div id="conclusion">
+                <h3>Conclusion</h3>
+                <p>
+                    It was a great experience working for three months in my GSoC project under Java PathFinder. 
+                    Thanks Java PathFinder community for your guidance and support. Thanks Google and Java Pathfinder for giving me this opportunity. 
+                </p>
+            </div>
+        </div>
+
+        <footer>
+
+        </footer>
+    </body>
+</html>
