@@ -39,8 +39,8 @@
             <div id="overview">
                 <h3>Overview</h3>
                 <p>
-                        My task was to support gradle for JPF, for java version 11 and fix the breaking changes caused by
-                        migrating JPF from java version 8 to 11.                     
+                    My task was to support gradle for JPF, for java version 11 and fix the breaking changes caused by
+                    migrating JPF from java version 8 to 11.                     
                 </p>
             </div>
             <div>
@@ -52,20 +52,36 @@
                         The arrival of Java 9 introduced some interesting changes like the module system, handling strings, etc 
                         to the javac compiler and the Java internals.
                     </p>
-                    <p class="my-work">There were many module classes which were not compiling which 
-                        led to build failure. This was because, packages with same names existed in different modules. This is because 
-                        split packages are not supported from java version 9. To compile the module classes I used --patch-module in gradle. 
+                    <p class="my-work">
+                        Prior to my work, all classes were compiled as part of the default module. 
+                        Many module classes did not compile anymore under this setup, 
+                        because packages with the same names can exist in different modules. This is because 
+                        split packages are not supported from java version 9. To compile the module classes I used --patch-module compiler option in gradle. 
                     </p>
                 </div>
-                    <div id="patch-module">
-                        --patch-module is used to override classes in a module, augment the contents of module and also an 
-                        option supported by javac to compile code "as if" part of the module.
+                    <div class="explanation">
+                        <div>
+                            <img src="../assets/gsoc/question-mark.png">
+                        </div>
+                        <div>
+                            <dl>
+                                <dt>Split packages</dt>
+                                <dd>The term is used to describe two packages having the same name exist in different libraries/applications. </dd>
+                                <br>
+                                <dt>--patch-module</dt>
+                                <dd>
+                                    --patch-module is used to override classes in module. It can also be used to augment the contents of a module. 
+                                    The --patch-module option is also supported by javac to compile code "as if" part of the module.
+                                </dd>
+                            </dl>
+                            
+                        </div>
                     </div> 
                 <div class="my-work">
                     <p>
-                        With these changes module classes where compiled successfully and the build was successfully.
+                        With these changes module classes where compiled successfully and the build was successful.
                     <br><br>
-                        The next task was to fix string concatenation. This was a major task as it was the main reason for test fails. For example, concatenating
+                        The next task was to fix string concatenation. This was a major task as it was the main reason for test failures. For example, concatenating
                         directory paths, expressions, etc.
                     </p>
                 </div> 
@@ -117,10 +133,18 @@
                         Summary of my work in fixing String concatenation,
                     </p>
                     <ul>
-                        <li>Fixed setBootstrap method</li>
-                        <li>Fixed setting the reference value for the string objects </li>
+                        <li>Fixed setBootstrap method
+                            <div>
+                                The previous version of this method was limited to loading lambda expressions, which are also compiled 
+                                to bootstrap methods. Other types of bootstrap methods were introduced with 
+                                Java 9, with different numbers of parameters, which were not correctly loaded before this work.
+                                Another important part of this work was to get the write method descriptor for string concatenation.
+                            </div>
+                        </li>
+                        <br>
+                        <li>Fixed setting wrong reference value for the string objects </li>
                         <li>Getting the bootstrap method arguments i.e string constants from the bootstrap method</li>
-                        <li>Fixed string concatenation with two strings</li>
+                        <li>Fixed simple cases of string concatenation</li>
                         <li>Wrote test cases for string concatenation </li>
                         <li>Fixed string concatenation with any number of strings.</li>
                         <li>Fixed most of the cases of string concatenation like string + char, string + byte, etc </li>
@@ -133,6 +157,7 @@
             
             <div id="pull-request">
                 <h3>Pull request</h3>
+                <a href="https://github.com/javapathfinder/jpf-core/pull/210">https://github.com/javapathfinder/jpf-core/pull/210</a>
             </div>
             <div id="conclusion">
                 <h3>Conclusion</h3>

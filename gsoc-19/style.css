@@ -63,10 +63,17 @@ nav li a:hover {
 .report-body p{
     text-align: justify;
 }
-#patch-module{
+.explanation{
     margin: 10px;
     padding:10px 15px;
     background-color: #E9E8E8;
+}
+.explanation div{
+    display: block;
+}
+.explanation img{
+    height: 20px;
+    width: 20px;
 }
 .my-work{
     margin-left: 10px;
@@ -76,13 +83,13 @@ nav li a:hover {
 .my-work p{
     margin: 0;
 }
-#code-snippet img{
-    height: 60px;
-    width: 600px;
+.my-work ul div{
+    padding-left: 30px;
+    text-align: justify;
 }
-#summary{
-    background-color: #f0f1f7;
-    padding: 15px 20px;
+
+#pull-request a{
+    text-decoration: none;
 }
 /************************** footer ***********************************/
 footer{
