@@ -20,10 +20,10 @@
             <h2 id="project-title">Gradle and Java 11 support for jpf-core</h2>
             <h3 id="author-name">by Yuvaraj Anbarasan</h3>
             <div id="about-jpf">
-                <h3>About JPF</h3>
-                <p>JPF is a model checking tool for Java applications. JPF-core is the core structure of
+                <h3>About Java Pathfinder</h3>
+                <p>Java Pathfinder (JPF) is a model checking tool for Java applications. JPF-core is the core structure of
                     JPF. It is a Virtual Machine (VM) for Java bytecode which executes the system under
-                    test (SUT). While execution semantics of Java bytecodes are clearly defined in Sun's 
+                    test (SUT). While the execution semantics of Java bytecodes are clearly defined in Sun's 
                     Java virtual machine specifications, the semantics are hardwired in JPF - the VM 
                     instruction set is represented by a set of classes that can be replaced. JPF is a special VM.
                     JPF itself is written in Java, so it is not as fast as your normal Java. That implies that JPF is VM
@@ -72,7 +72,7 @@
                                 <br>
                                 <dt>--patch-module</dt>
                                 <dd>
-                                    --patch-module is used to override classes in module. It can also be used to augment the contents of a module. 
+                                    --patch-module is used to override classes in a module. It can also be used to augment the contents of a module. 
                                     The --patch-module option is also supported by javac to compile code "as if" part of the module.
                                 </dd>
                             </dl>
@@ -81,7 +81,7 @@
                     </div> 
                 <div class="my-work">
                     <p>
-                        With these changes module classes where compiled successfully and the build was successful.
+                        With these changes module classes were compiled successfully and the build was successful.
                     <br><br>
                         The next task was to fix string concatenation. This was a major task as it was the main reason for test failures. For example, concatenating
                         directory paths, expressions, etc.
@@ -89,7 +89,7 @@
                 </div> 
                 <p>
                     Java 9 changed the way how strings were handled.
-                    To know more about the changes in handling strings, lets take a simple example of string concatenation.
+                    To know more about the changes in handling strings, let's take a simple example of string concatenation.
                 </p>
                 <div id="code-snippet">
                     <img src="../assets/gsoc/string-concatenation/code.PNG">
@@ -113,7 +113,7 @@
                     <p>
                         As stated in the project description of Java 9, the reason for this change is to enable future optimizations of String concatenation 
                         without requiring further changes to the bytecode produced by javac.
-                        And dynamic method invocation is the ideal solution for that because it delays the method invocation to the runtime.                        
+                        And dynamic method invocation is the ideal solution for that because it delays the method invocation to runtime.                        
                     </p>               
                 </div>
                 <div>
@@ -140,7 +140,7 @@
                                 The previous version of this method was limited to loading lambda expressions, which are also compiled 
                                 to bootstrap methods. Other types of bootstrap methods were introduced with 
                                 Java 9, with different numbers of parameters, which were not correctly loaded before this work.
-                                Another important part of this work was to get the write method descriptor for string concatenation.
+                                Another important part of this work was to get the right method descriptor for string concatenation.
                             </div>
                         </li>
                         <br>
@@ -164,8 +164,11 @@
             <div id="conclusion">
                 <h3>Conclusion</h3>
                 <p>
-                    It was a great experience working for three months in my GSoC project under Java PathFinder. 
-                    Thanks Java PathFinder community for your guidance and support. Thanks Google and Java Pathfinder for giving me this opportunity. 
+                    It was a great experience working for three months on my project for Java Pathfinder under Google Summer of Code. 
+                    I sincerely thank my mentor Cyrille Artho whose support, guidance and continuous encouragement helped me immensely 
+                    in bringing this work where it stands. I would also like to extend my thanks to my co-mentors Franck van Breugel and 
+                    Willem Visser for their guidance and valuable time. 
+                    Thanks, Google and Java Pathfinder for giving me this opportunity. 
                 </p>
             </div>
         </div>
