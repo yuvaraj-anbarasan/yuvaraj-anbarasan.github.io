@@ -2,29 +2,29 @@ body{
     margin: auto;
 }
 /************************* Navigation bar ***********************/
-ul {
+nav ul {
     list-style-type: none;
     margin: 0;
     padding:0;
     padding-right: 10%;
     overflow: hidden;
-    background-color: #333;
 }
 
-li {
+nav li {
     float: right;
 }
 
-li a {
+nav li a {
     display: block;
-    color: white;
     text-align: center;
     padding: 20px 16px;
+    padding-bottom: 10px;
     text-decoration: none;
+    color: #6d6d6d;
 }
   
-li a:hover {
-    background-color: #111;
+nav li a:hover {
+    border-bottom: 5px solid #d7d7d7;
 }
 
 /************************* Profile pic *************************/
