@@ -49,7 +49,7 @@ nav li a:hover {
     margin-left: 10%;
     margin-right: 10%;
     padding: 0;
-    font-family: sans-serif, Verdana, Geneva, Tahoma;
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
     color: #6c6a74;
 }
 #project-title{
@@ -112,9 +112,28 @@ nav li a:hover {
     padding-left: 30px;
     text-align: justify;
 }
-
+#about-jpf img{
+        height: 18px;
+        width: 18px;
+        display: inline-block;
+}
+#about-jpf h3{
+    margin-bottom: 10px;
+    display: inline-block;
+}
+#about-jpf div a{
+    text-decoration: none;
+    font-size: 18px;
+    color: #6d6d6d;
+}
+#about-jpf p a{
+    text-decoration: none;
+    color: #6c6a74;
+    font-weight: bold;
+}
 #pull-request a{
     text-decoration: none;
+    color: #6c6a74;
 }
 /************************** footer ***********************************/
 footer{
