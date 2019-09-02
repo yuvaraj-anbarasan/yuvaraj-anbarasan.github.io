@@ -137,6 +137,20 @@ nav li a:hover {
 }
 /************************** footer ***********************************/
 footer{
-    height: 200px;
+    margin-top: 5%;
+    height: 100px;
     background-color: #e7e7e7;
+}
+.footer-content{
+    margin:0 10% 0 10%;
+    text-align: center;
+}
+.footer-content div{
+    margin-right: 10%;
+    display: inline-block;
+}
+.footer-content img{
+    height: 30px;
+    width: 30px;
+    margin:20px;;
 }
