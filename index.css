@@ -29,7 +29,6 @@ nav li a:hover {
 
 /************************* Profile pic *************************/
 .profile{
-    
     text-align: center;
 }
 
@@ -47,14 +46,14 @@ nav li a:hover {
     padding: 20px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: #6E6D6D;
-    font-size: 40px;
+    font-size: 50px;
 }
 
 #profile-details h3{
     margin: auto;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: #959191;
-    font-size: 30px;
+    font-size: 20px;
 }
 /************************** footer ***********************************/
 footer{
