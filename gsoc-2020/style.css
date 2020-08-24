@@ -1,0 +1,156 @@
+body{
+    margin: auto;
+}
+/************************* Navigation bar ***********************/
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding:0;
+    padding-right: 10%;
+    overflow: hidden;
+}
+
+nav li {
+    float: right;
+}
+
+nav li a {
+    display: block;
+    text-align: center;
+    padding: 20px 16px;
+    padding-bottom: 10px;
+    text-decoration: none;
+    color: #6d6d6d;
+}
+  
+nav li a:hover {
+    border-bottom: 5px solid #d7d7d7;
+}
+/************************ gsoc logo ******************************/
+#gsoc-logo{
+    text-align: center;
+}
+#gsoc-logo h3{
+    margin: 0;
+    color: #787878;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: sans-serif;
+}
+#gsoc-logo img{
+    margin-left: auto;
+    margin-right: auto;
+    height: 200px;
+    width: 400px;
+    display: block;
+}
+/************************ report body *****************************/
+.report-body{
+    margin-left: 10%;
+    margin-right: 10%;
+    padding: 0;
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    color: #6c6a74;
+}
+#project-title{
+    margin: 20px 0 0 0;
+    color: #6d6d6d;
+}
+#author-name{
+    margin: 0 0 30px 0;
+    font-size: 14px;
+    color: #6c6a74;
+    font-weight: normal;
+}
+.report-body h3{
+    color: #6d6d6d;
+    font-size: 16px;
+}
+.report-body h4{
+    font-weight: normal;
+}
+.report-body img{
+    width: 80%;
+}                                                                            
+.report-body p{
+    text-align: justify;
+}
+#about-jpf{
+    margin-bottom: 40px;
+}
+#work-summary{
+    margin-bottom: 40px;
+}
+#overview{
+    margin-bottom: 40px;
+}
+#pull-request{
+    margin-bottom: 40px;
+}
+.explanation{
+    margin: 10px;
+    padding:10px 15px;
+    background-color: #e7e7e7;
+    color: #6c6a74;
+}
+.explanation div{
+    display: block;
+}
+.explanation img{
+    height: 20px;
+    width: 20px;
+}
+.my-work{
+    margin-left: 10px;
+    padding: 15px;
+    border-left:5px #474747 solid;
+}
+.my-work p{
+    margin: 0;
+}
+.my-work ul div{
+    padding-left: 30px;
+    text-align: justify;
+}
+#about-jpf img{
+        height: 18px;
+        width: 18px;
+        display: inline-block;
+}
+#about-jpf h3{
+    margin-bottom: 10px;
+    display: inline-block;
+}
+#about-jpf div a{
+    text-decoration: none;
+    font-size: 18px;
+    color: #6d6d6d;
+}
+#about-jpf p a{
+    text-decoration: none;
+    color: #6c6a74;
+    font-weight: bold;
+}
+#pull-request a{
+    text-decoration: none;
+    color: #6c6a74;
+}
+/************************** footer ***********************************/
+footer{
+    margin-top: 5%;
+    height: 100px;
+    background-color: #e7e7e7;
+}
+.footer-content{
+    margin:0 10% 0 10%;
+    text-align: center;
+}
+.footer-content div{
+    margin-right: 10%;
+    display: inline-block;
+}
+.footer-content img{
+    height: 30px;
+    width: 30px;
+    margin:20px;;
+}
