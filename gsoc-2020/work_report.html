@@ -78,8 +78,9 @@
                 </p>
                 <p>
                     JPF also has its own set of model classes which are used as a substitute for the JVM classes. The main reason for having model 
-                    classes is that a lot of the functionalities can be implemented that native methods have in simple Java code. Sometimes there is a
+                    classes is that a lot of the functionalities can be implemented that the native methods have in simple Java code. Sometimes there exists a
                     need to delegate the execution of a method to the host JVM and this is again done by declaring a function native using the native keyword.
+                    The native are invoked in the JVM using reflection, with the arguments drawn from the Model Java Interface environment (MJI).
                 </p>
                 <p>
                     Since the native method implementation of JPF is depenedent on the host JVM's implementation, a lot of issues occured when migrating JPF from
@@ -116,11 +117,11 @@
                     <div class="my-work">
                         <p>
                             Fixed <label class="highlight-text">java.lang.String.computeStringHashCode</label> native peer . Previously (in java 8 and lower 
-                            versions), String values were stored as characters, hence the hash was computed as,
+                            versions), String values were stored as characters, and the string hash was computed as,
                             <div class="highlight-block">
                             s[0]*31^(n-1) + s[1]*31^(n-2) + ... + s[n-1]
                             </div>
-                            where s[i] was character. This changed in java 9 and above versions, where s[i] is of type byte. Therefore, the existing logic didn't
+                            where s[i] was a character. This changed in java 9 and above versions, where s[i] is of type byte. Therefore, the existing logic didn't
                             work since it tried to get char array instead of byte array. This PR fixed this issue by changing the logic to get byte array.                        
                         </p>
                     </div>
@@ -155,7 +156,7 @@
                         <p>
                             Since module system was introduced in java 9, the accessibilty of classes entirely depends on the modules instead of packages.
                             Modularity adds a higher level of aggregation above packages. With module system, all the classes are dependent on the module info.
-                            Every class has its own module info. Module info contains details about class module. One such case is which caused issue in JPF
+                            Every class has its own module info. Module info contains details about class module. One such case which caused issue in JPF
                             is <label class="highlight-text">Package.getPackages</label>.
                         </p>
                         <p>
@@ -172,13 +173,16 @@
                         </p>
                         <p>
                             This issue was fixed by adding model class for Module class. Since the model classes are already resolved at JPF load time, when 
-                            <label class="highlight-text">Package</label> classcalls <label class="highlight-text">Module</label> class, the classLoader 
+                            <label class="highlight-text">Package</label> class calls <label class="highlight-text">Module</label> class, the ClassLoader 
                             fetches the resolved model class.
                         </p>
                         <p>
-                            Another issue was related to Package class initialization. A few fields related to Package was missing and were moved to the inner class of
-                            Package. Hence the issue was solved by initializing the fields inside the inner class.
-                        </p>
+                            Another issue related to <label class="highlight-text">Package</label> class was, package version info initialization.
+                             A few fields related to Package were missing and were moved to the 
+                            inner class <label class="highlight-text">VersionInfo</label> of <label class="highlight-text">Package</label>
+                             class. This issue was fixed by resolving <label class="highlight-text">VersionInfo</label> class and
+                             initializing the fields in this class.
+                        </p>    
                     </div>
                 </div>
                 <div class="pr">
@@ -191,8 +195,8 @@
                     </div>
                     <div class="my-work">
                         <p>
-                            Added and implemented missing methods <label class="highlight-text">getDefinedPacage</label> and 
-                            <label class="highlight-text">getDefinedPacages</label> to <label class="highlight-text">java.lang.ClassLoader</label> model and native peer 
+                            Added and implemented missing methods <label class="highlight-text">getDefinedPackage</label> and 
+                            <label class="highlight-text">getDefinedPackages</label> in <label class="highlight-text">java.lang.ClassLoader</label> model and native peer 
                             classes
                         </p>
                     </div>
@@ -207,8 +211,8 @@
                     </div>
                     <div class="my-work">
                         <p>
-                            Added module path to class path. <label class="highlight-text">ClassLoader.getResource</label> was failing to fetch resource because
-                            the class path was missing module path.
+                            <label class="highlight-text">ClassLoader.getResource</label> was failing to fetch resource as
+                            the class path was missing module path. Fixed this issue by adding module path to class path. 
                         </p>
                     </div>
                 </div>
@@ -223,13 +227,16 @@
                     <div class="my-work">
                         <p>
                             Modified <label class="highlight-text">ClassLoader.getResources</label> method logic. The <label class="highlight-text">ClassLoader.getResources</label>
-                            returns an <label class="highlight-text">Enumeration</label>. Previously, the method used an <label class="highlight-text">ArrayList</label> 
-                            to store the resource URLs and converts the <label class="highlight-text">ArrayList</label> to <label class="highlight-text">Enumeration</label>, 
-                            which is returned. The URLs were not able to be added because of type mismatch which occured because of changes in host jvm's implementation.
+                            method returns an <label class="highlight-text">Enumeration</label>. Previously, the method used an <label class="highlight-text">ArrayList</label> 
+                            to store the resource URLs and converted the <label class="highlight-text">ArrayList</label> to <label class="highlight-text">Enumeration</label>, 
+                            which was returned by the method. The URLs were not able to be added because of type mismatch which occured due to the changes in host 
+                            JVM's implementation.
                         </p>
                         <p>
-                            This issue was fixed by storing the resource URL's in an Enumeration insted of storing it in an <label class="highlight-text">ArrayList</label>
-                            and returning the converted <label class="highlight-text">Arraylist</label>.
+                            This issue was fixed by storing the resource URL's in an <label class="highlight-text">Enumeration</label> insted of 
+                            storing it in an <label class="highlight-text">ArrayList</label>
+                            and return the <label class="highlight-text">Enumeration</label> instead the converting 
+                            <label class="highlight-text">Arraylist</label> to <label class="highlight-text">Enumeration</label> and returning it.
                         </p>
                     </div>
                 </div>
@@ -244,11 +251,16 @@
                     <div class="my-work">
                         <p>
                             Removed model class for <label class="highlight-text">Module</label> class and added logic to get partially resolved classes when 
-                            seting bootstrap method. Added <label class="highlight-text">Module.getModuleName</label> method to model and native peer classes
-                            to get module name of a class. The method is implemented in the native peer to make use of the host JVM's <label class="highlight-text">Class.getModule</label>. 
-                            Using this, and based on whether the resolved or loaded class is JPF class or not, the module name was added to
+                            seting bootstrap method (in<label class="highlight-text">JVMClassInfo.setBootstrapMethod</label>). 
+                        </p>
+                        <p>
+                            Also, added <label class="highlight-text">Class.getModuleName</label> method to model and native peer classes
+                            to get module name of a class. The method is implemented in the native peer to make use of the host JVM's 
+                            <label class="highlight-text">Class.getModule</label>. 
+                            Using <label class="highlight-text">Class.getModule</label>, and based on whether the resolved or loaded class is a 
+                            JPF class or not, the module name was added to
                             the class path in <label class="highlight-text">Class.getResource</label> accordingly. This fixed the issue with 
-                            <label class="highlight-text">Class.getResource</label>.
+                            <label class="highlight-text">Class.getResource</label> method.
                         </p>
                     </div>
                 </div>
