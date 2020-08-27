@@ -115,12 +115,12 @@
                     </div>
                     <div class="my-work">
                         <p>
-                            Fixed <label class="highlight-text">java.lang.String</label> native peer <label class="highlight-text">computeStringHashCode</label> 
-                            method. Previously (in java 8 and lower versions), String values were stored as characters, hence the hash was computed as,
+                            Fixed <label class="highlight-text">java.lang.String.computeStringHashCode</label> native peer . Previously (in java 8 and lower 
+                            versions), String values were stored as characters, hence the hash was computed as,
                             <div class="highlight-block">
                             s[0]*31^(n-1) + s[1]*31^(n-2) + ... + s[n-1]
                             </div>
-                            were s[i] was character. This chnaged in java 9 and above versions, were s[i] is of type byte. Therefore, the existing logic didn't
+                            where s[i] was character. This changed in java 9 and above versions, where s[i] is of type byte. Therefore, the existing logic didn't
                             work since it tried to get char array instead of byte array. This PR fixed this issue by changing the logic to get byte array.                        
                         </p>
                     </div>
@@ -137,8 +137,8 @@
                         <p>
                             Added and implemented <label class="highlight-text">checkOutOffBounds</label> method in <label class="highlight-text">java.lang.String</label>
                             model class. <label class="highlight-text">checkOutOffBounds</label> method checks for 
-                            <label class="highlight-text">StringIndexOutOfBoundsException</label> by checking the string's offset is negative or greater than 
-                            the length.
+                            <label class="highlight-text">StringIndexOutOfBoundsException</label> by checking if the string offset is negative or greater than 
+                            the string length.
                         </p>
                     </div>
                 </div>
@@ -153,7 +153,13 @@
                     </div>
                     <div class="my-work">
                         <p>
-                            Since module system was introduced in java 9, <label class="highlight-text">Package.getPackages</label> inernally calls the 
+                            Since module system was introduced in java 9, the accessibilty of classes entirely depends on the modules instead of packages.
+                            Modularity adds a higher level of aggregation above packages. With module system, all the classes are dependent on the module info.
+                            Every class has its own module info. Module info contains details about class module. One such case is which caused issue in JPF
+                            is <label class="highlight-text">Package.getPackages</label>.
+                        </p>
+                        <p>
+                            <label class="highlight-text">Package.getPackages</label> inernally calls the 
                             <label class="highlight-text">Module</label> class method which again calls <label class="highlight-text">Package</label> class,
                             and as a result of mutual dependency between the two classes, the call to <label class="highlight-text">Package.getPackges</label>
                              was going into an infinite loop, causing a StackOverFlowError.
